@@ -6,6 +6,9 @@ public class UE4BatteryCollector : ModuleRules
 {
 	public UE4BatteryCollector(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay" });
-	}
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay","UMG" });
+
+        PublicDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore"});
+
+    }
 }
