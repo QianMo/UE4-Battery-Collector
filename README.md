@@ -1,6 +1,6 @@
 # Unreal-Battery-Collector
 
-screen Shot:
+Screen shot:
 
 ![](screenShot1.jpg)
 
