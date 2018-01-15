@@ -99,6 +99,63 @@ EBatteryPlayState AUE4BatteryCollectorGameMode::GetCurrntState( ) const
 
 EBatteryPlayState AUE4BatteryCollectorGameMode::SetCurrentState(EBatteryPlayState newState)
 {
+	// set current state
 	CurrentState = newState;
+	// handle the new state
+	HandleNewState(CurrentState);
+
 	return CurrentState;
+}
+
+void AUE4BatteryCollectorGameMode::HandleNewState(EBatteryPlayState NewState)
+{
+	switch (NewState)
+	{
+		// If the game is playing
+		case  EBatteryPlayState::EPlaying:
+		{
+			//spawn volumes active
+			for (ASpawnVolume* Volume : SpawnVolumeActors)
+			{
+				Volume->SetSpawningActive(true);
+			}
+		}
+		break;
+		// If we've won the game
+		case  EBatteryPlayState::EWon:
+		{
+			// spawn volums inactive
+			for (ASpawnVolume* Volume : SpawnVolumeActors)
+			{
+				Volume->SetSpawningActive(false);
+			}
+		}
+		break;
+		// If we've lost the game
+		case  EBatteryPlayState::EGameOver:
+		{
+			// spawn volums inactives
+			for (ASpawnVolume* Volume : SpawnVolumeActors)
+			{
+				Volume->SetSpawningActive(false);
+			}
+			// block player input
+			APlayerController* PlayController = UGameplayStatics::GetPlayerController(this, 0);
+			if (PlayController)
+			{
+				PlayController->SetCinematicMode(true, false, false, true,true);
+			}
+			// ragdoll the character
+			ACharacter* MyCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
+			if (MyCharacter)
+			{
+				MyCharacter->GetMesh( )->SetSimulatePhysics(true);
+				MyCharacter->GetMovementComponent( )->MovementState.bCanJump = false;
+			}
+		}
+		break;
+		//Unkown
+		default:
+			break;
+	}
 }
