@@ -143,7 +143,7 @@ void AUE4BatteryCollectorGameMode::HandleNewState(EBatteryPlayState NewState)
 			APlayerController* PlayController = UGameplayStatics::GetPlayerController(this, 0);
 			if (PlayController)
 			{
-				PlayController->SetCinematicMode(true, false, false, true,true);
+				PlayController->SetCinematicMode(true, false, false, true, true);
 			}
 			// ragdoll the character
 			ACharacter* MyCharacter = UGameplayStatics::GetPlayerCharacter(this, 0);
@@ -157,5 +157,12 @@ void AUE4BatteryCollectorGameMode::HandleNewState(EBatteryPlayState NewState)
 		//Unkown
 		default:
 			break;
+			// If we've won the game
+		case  EBatteryPlayState::EUnknown:
+		{
+			// do nothing
+		}
+		break;
+
 	}
 }
