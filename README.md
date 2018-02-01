@@ -6,9 +6,6 @@ Screen shot:
 
 ![](screenShot1.jpg)
 
-![](screenShot2.jpg)
-
-
 
 
 # Useful Link
