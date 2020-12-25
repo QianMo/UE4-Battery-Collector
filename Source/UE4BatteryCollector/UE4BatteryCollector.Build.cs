@@ -4,7 +4,7 @@ using UnrealBuildTool;
 
 public class UE4BatteryCollector : ModuleRules
 {
-	public UE4BatteryCollector(TargetInfo Target)
+	public UE4BatteryCollector(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay","UMG" });
 
